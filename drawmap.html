@@ -103,7 +103,7 @@
               createDepot: function(coord) {
                 var feature = new ol.Feature({
                   type: 'place',
-                  geometry: new ol.geom.Point(ol.proj.fromLonLat(coord)),
+                  geometry: new ol.geom.Point(ol.proj.fromLonLat([coord[1],coord[0]])), // LatLon (standard) to LonLat (x,y)
                   crossOrigin: null
                 });
                 //feature.setStyle(styles.icon);
@@ -139,7 +139,7 @@
      //-19.9203075,-43.9501609
      // -19.9228191,-43.9505176
 
-     // -19.9274354,-43.935743  
+     // -19.9274354,-43.935743
      // -19.9297712,-43.9429171
 
      // -19.915462,-43.9364852
@@ -148,7 +148,17 @@
 
       //var points =  [ [-43.9342396, -19.9198005], [ -43.9392664, -19.9163804 ], [ -43.9428784, -19.92304 ]], // //[-43.9342396, -19.9198005], [-43.9439574, -19.9282478] ], //[-43.9473161, -19.9249594] ], // [ [-51.146328, -30.012043], [ -51.176325, -30.034208 ], [ -51.194859, -30.042295 ] ],
 
-          var points =  [ [-43.9443015, -19.9229329], [-43.9481100, -19.9209075], [-43.9505176, -19.9228191], [-43.9443015, -19.9229329], [-43.935743,-19.9274354], [-43.9429171,-19.9297712], [-43.9443015,-19.9229329], [-43.9364852,-19.915462], [-43.9435495,-19.9166798] ],
+          var points =  [
+           [-19.9229329, -43.9443015],
+           [-19.9209075, -43.9481100],
+           [-19.9228191, -43.9505176],
+           [-19.9229329, -43.9443015],
+           [-19.9274354, -43.935743,],
+           [-19.9297712, -43.9429171],
+           [-19.9229329, -43.9443015],
+           [-19.915462, -43.9364852],
+           [-19.9166798, -43.9435495]
+          ],
 
           //msg_el = document.getElementById('msg'),
           url_osrm_nearest = 'http://router.project-osrm.org/nearest/v1/driving/',//'http://10.15.1.219:5000/nearest/v1/driving/',
@@ -205,6 +215,9 @@
       createTools.createRoute(json2.routes[0].geometry);
 */
 
+      function toLonLat(point) {
+         return [point[1], point[0]];
+      }
 
 
       // http://10.15.1.219:5000/route/v1/driving/-43.9473161,-19.9249594;-43.9492282,-19.926191"
@@ -212,8 +225,8 @@
       for(i = 0; i<points.length-1; i++) {
       if(points[i+1][0] != points[0][0])
          createTools.createFeature(points[i+1]);
-      console.log(url_osrm_route + points[i] + ';' + points[i+1]);
-      fetch(url_osrm_route + points[i] + ';' + points[i+1] + "?continue_straight=true").then(function(r) {
+      console.log(url_osrm_route + toLonLat(points[i]) + ';' + toLonLat(points[i+1]));
+      fetch(url_osrm_route + toLonLat(points[i]) + ';' + toLonLat(points[i+1]) + "?continue_straight=true").then(function(r) {
             return r.json();
           }).then(function(json) {
             if(json.code !== 'Ok') {
@@ -230,7 +243,7 @@
 
           });
       }
-      fetch(url_osrm_route + points[points.length-1] + ';' + points[0]).then(function(r) {
+      fetch(url_osrm_route + toLonLat(points[points.length-1]) + ';' + toLonLat(points[0])).then(function(r) {
             return r.json();
           }).then(function(json) {
             if(json.code !== 'Ok') {
@@ -246,9 +259,9 @@
             createTools.createRoute(json2.routes[0].geometry);
 
           });
-      
+
       // if not using 'fetch', load manually routing
-   /*   
+   /*
       fetch(url_osrm_route + points[1] + ';' + points[2]).then(function(r) {
             return r.json();
           }).then(function(json) {
@@ -274,7 +287,7 @@
             //console.log(points[0]);
             console.log(points[2]);
           });
-    */      
+    */
 
     </script>
   </body>
