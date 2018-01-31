@@ -24,45 +24,6 @@
     });
 
 
-
-/*
-    vectorSource.on('change', function(evt){
-        if (vectorSource.getState() === 'ready') {
-            //console.log('ok'+countEv);
-            countEv++;
-           console.log('ok'+countEv);
-           if (typeof window.callPhantom === 'function') {
-             window.callPhantom({ hello: countEv });
-           }
-        }
-    });
-    */
-
-
-    /* // ERA UTIL
-    vectorLayer.on('postcompose', function(event) {
-        if (vectorLayer.getVisible()) {
-             countEv++;
-             console.log(countEv);
-             //alert('apareceu!zz'+countEventUpdate);
-             //if((flagIni==0) && (countEventUpdate==0)) {
-
-
-             if(countEv==4) {
-               console.log('time to go!');
-               //alert('zero');
-               if (typeof window.callPhantom === 'function') {
-                 window.callPhantom({ hello: countEv });
-               }
-             }
-
-        }
-    });
-    */
-
-      //var vx = new ol.proj.fromLonLat( [-51.146328, -30.012043] ).transform(new ol.dataProjection('EPSG:4326'), new ol.featureProjection('EPSG:3857'));
-      //console.log(vx);
-
       var map = new ol.Map({
         target: 'mymap',
         controls: [],
@@ -133,21 +94,7 @@
               }
       }
 
-
-     // -19.9229329,-43.9443015
-
-     //-19.9203075,-43.9501609
-     // -19.9228191,-43.9505176
-
-     // -19.9274354,-43.935743
-     // -19.9297712,-43.9429171
-
-     // -19.915462,-43.9364852
-     // -19.9166448,-43.9434195
-
-
-      //var points =  [ [-43.9342396, -19.9198005], [ -43.9392664, -19.9163804 ], [ -43.9428784, -19.92304 ]], // //[-43.9342396, -19.9198005], [-43.9439574, -19.9282478] ], //[-43.9473161, -19.9249594] ], // [ [-51.146328, -30.012043], [ -51.176325, -30.034208 ], [ -51.194859, -30.042295 ] ],
-
+          // LatLon format (ISO standard)
           var points =  [
            [-19.9229329, -43.9443015],
            [-19.9209075, -43.9481100],
@@ -183,37 +130,6 @@
 
       //createTools.createDepot(points[0]); // depot
       createTools.createDepot(points[0]); // depot
-/*
-      console.log(url_osrm_route + points[0] + ';' + points[1]);
-
-      createTools.createFeature(points[1]);
-      createTools.createFeature(points[2]);
-      //createTools.createFeature(points[3]); //depot
-      createTools.createFeature(points[4]);
-      //createTools.createFeature(points[5]);
-
-      json_string = '{"code":"Ok","routes":[{"geometry":"vqqxB~{ckGeCmFmFmAwNuBiIyAIVtEtJCxAYlAkBrMIjBl@CbDd@}@~F~NlCBLoEtCSEQ[j@oD","legs":[{"steps":[],"distance":2224.7,"duration":209,"summary":"","weight":205}],"distance":2224.7,"duration":209,"weight_name":"routability","weight":205}],"waypoints":[{"hint":"jgEAgP___3-4AAAAOwEAACwAAAAAAAAAuAAAADsBAAAsAAAAAAAAAJ0BAADenWH9SwzQ_uCdYf1HDND-AQAPAJ95_xI=","name":"Avenida Assis Chateaubriand","location":[-43.934242,-19.919797]},{"hint":"3UsUgP___39WAAAAWwAAAAAAAAAAAAAAVgAAAFsAAAAAAAAAAAAAAJ0BAABDimH9thnQ_j6KYf2kGdD-AAAPAJ95_xI=","name":"Rua dos Caetés","location":[-43.939261,-19.916362]}]}';
-      json2 = JSON.parse( json_string );
-      createTools.createRoute(json2.routes[0].geometry);
-
-
-
-      json_string = '{"code":"Ok","routes":[{"geometry":"f|pxBj{dkGrGr@n[yPfM`CmG`b@","legs":[{"steps":[],"distance":1617.7,"duration":130.9,"summary":"","weight":124.9}],"distance":1617.7,"duration":130.9,"weight_name":"routability","weight":124.9}],"waypoints":[{"hint":"3UsUgP___39WAAAAWwAAAAAAAAAAAAAAVgAAAFsAAAAAAAAAAAAAAJ0BAABDimH9thnQ_j6KYf2kGdD-AAAPAJ95_xI=","name":"Rua dos Caetés","location":[-43.939261,-19.916362]},{"hint":"jQcAgP___38dAAAAUwAAAAAAAAAAAAAAHQAAAFMAAAAAAAAAAAAAAJ0BAADre2H93_7P_iJ8Yf2g_8_-AAAPAJ95_xI=","name":"Avenida Augusto de Lima","location":[-43.942933,-19.923233]}]}';
-      json2 = JSON.parse( json_string );
-      createTools.createRoute(json2.routes[0].geometry);
-
-      json_string = '{"code":"Ok","routes":[{"geometry":"`yqxBbogkGr@uEzEbA`GbAvFc^","legs":[{"steps":[],"distance":930.1,"duration":92.2,"summary":"","weight":92.2}],"distance":930.1,"duration":92.2,"weight_name":"routability","weight":92.2}],"waypoints":[{"hint":"3CAAgP___38NAAAAWQAAAAAAAAAAAAAADQAAAFkAAAAAAAAAAAAAAJ0BAADoVWH9tQfQ_tdVYf13B9D-AAAPAJ95_xI=","name":"Avenida Augusto de Lima","location":[-43.952664,-19.920971]},{"hint":"MhYAgP___39mAAAAfwAAAAAAAAAAAAAAZgAAAH8AAAAAAAAAAAAAAJ0BAADoamH9gfjP_sxqYf0h-M_-AAAPAJ95_xI=","name":"Rua dos Timbiras","location":[-43.947288,-19.924863]}]}';
-      json2 = JSON.parse( json_string );
-      createTools.createRoute(json2.routes[0].geometry);
-
-      json_string = '{"code":"Ok","routes":[{"geometry":"jqrxBpmfkGnA_IyF}@n@wFmM}ByJaTtDyVy]ov@hH{DsJuSjAi@D}A","legs":[{"steps":[],"distance":3311.4,"duration":327.7,"summary":"","weight":321.7}],"distance":3311.4,"duration":327.7,"weight_name":"routability","weight":321.7}],"waypoints":[{"hint":"MhYAgP___39mAAAAfwAAAAAAAAAAAAAAZgAAAH8AAAAAAAAAAAAAAJ0BAADoamH9gfjP_sxqYf0h-M_-AAAPAJ95_xI=","name":"Rua dos Timbiras","location":[-43.947288,-19.924863]},{"hint":"xCUAgM4lAIA1AAAA0gAAAAAAAAAAAAAANQAAANIAAAAAAAAAAAAAAJ0BAACry2H93xrQ_jrLYf1hGdD-AAAPAJ95_xI=","name":"Rua Eurita","location":[-43.922517,-19.916065]}]}';
-      json2 = JSON.parse( json_string );
-      createTools.createRoute(json2.routes[0].geometry);
-
-      json_string = '{"code":"Ok","routes":[{"geometry":"lzpxBvrakGQbAJXkAh@fJ~RuV|MUVqAnJfKjTtC`@YfB`I`B~CdI`J~RyE{@s@fE","legs":[{"steps":[],"distance":2756.5,"duration":259.4,"summary":"","weight":251.4}],"distance":2756.5,"duration":259.4,"weight_name":"routability","weight":251.4}],"waypoints":[{"hint":"xCUAgM4lAIA1AAAA0gAAAAAAAAAAAAAANQAAANIAAAAAAAAAAAAAAJ0BAACry2H93xrQ_jrLYf1hGdD-AAAPAJ95_xI=","name":"Rua Eurita","location":[-43.922517,-19.916065]},{"hint":"CQkAgP___3-bAAAAzAAAAAAAAAAAAAAAmwAAAMwAAAAAAAAAAAAAAJ0BAADzg2H9HRHQ_tSDYf2yEND-AAAPAJ95_xI=","name":"Rua dos Carijós","location":[-43.940877,-19.918563]}]}';
-      jason2 = JSON.parse( json_string );
-      createTools.createRoute(json2.routes[0].geometry);
-*/
 
       function toLonLat(point) {
          return [point[1], point[0]];
@@ -259,35 +175,6 @@
             createTools.createRoute(json2.routes[0].geometry);
 
           });
-
-      // if not using 'fetch', load manually routing
-   /*
-      fetch(url_osrm_route + points[1] + ';' + points[2]).then(function(r) {
-            return r.json();
-          }).then(function(json) {
-            if(json.code !== 'Ok') {
-              //msg_el.innerHTML = 'No route found.';
-              return;
-            }
-            //msg_el.innerHTML = 'Route added';
-            //points.length = 0;
-            //console.log(json);
-            console.log(JSON.stringify(json));
-            createTools.createRoute(json.routes[0].geometry);
-            //utils.createFeature(points[0]);
-
-            //countEventUpdate += 1;
-            createTools.createFeature(points[0]);
-            createTools.createFeature(points[1]);
-            createTools.createFeature(points[2]);
-
-            if (typeof window.callPhantom === 'function') {
-              window.callPhantom({ hello: countEv });
-            }
-            //console.log(points[0]);
-            console.log(points[2]);
-          });
-    */
 
     </script>
   </body>
